@@ -1,0 +1,28 @@
+<div>
+    <table class="wx-table">
+        <thead class="wx-table-head">
+            <tr>
+                <th ng-repeat="header in headers" ng-click="clickHeader(header.field)">{{ header.displayValue }}</th>
+            </tr>
+        </thead>
+        <tbody class="wx-table-body">
+            <tr ng-repeat="row in rowsToShow">
+                <td ng-repeat="header in headers" class="{{ header.field }}">
+                    <span ng-if="!header.template">
+                        {{ row[header.field] | wxTableFilterCaller: header.filter }}
+                    </span>
+                    <span ng-if="header.template">
+                        <span wx-compile-template="header.template"></span>
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot class="wx-table-foot">
+            <tr>
+                <td ng-click="PreviousPage()">Previous</td>
+                <td>{{ currentPage + 1 }} / {{ numberOfPages }}</td>
+                <td ng-click="nextPage()">Next</td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
